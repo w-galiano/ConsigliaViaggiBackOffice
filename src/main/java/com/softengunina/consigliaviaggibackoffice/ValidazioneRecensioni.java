@@ -65,7 +65,7 @@ public class ValidazioneRecensioni extends javax.swing.JFrame {
 
         aModel.setColumnIdentifiers(tableColumnNames);
         if (recensioni == null) {
-            this.RecensioniTable.setModel(aModel);
+            this.ValidazioneRecensioniTable.setModel(aModel);
             return;
         }
 
@@ -82,7 +82,7 @@ public class ValidazioneRecensioni extends javax.swing.JFrame {
             aModel.addRow(objects);
         }
         
-        this.RecensioniTable.setModel(aModel);
+        this.ValidazioneRecensioniTable.setModel(aModel);
     }
 
     /**
@@ -96,7 +96,7 @@ public class ValidazioneRecensioni extends javax.swing.JFrame {
 
         ValidazioneRecensioniPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        RecensioniTable = new javax.swing.JTable();
+        ValidazioneRecensioniTable = new javax.swing.JTable();
         ProjectLabel = new javax.swing.JLabel();
         CompanyLabel = new javax.swing.JLabel();
         ValidazioneRecensioniLabel = new javax.swing.JLabel();
@@ -110,7 +110,7 @@ public class ValidazioneRecensioni extends javax.swing.JFrame {
 
         ValidazioneRecensioniPanel.setBackground(new java.awt.Color(255, 255, 255));
 
-        RecensioniTable.setModel(new javax.swing.table.DefaultTableModel(
+        ValidazioneRecensioniTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -118,12 +118,12 @@ public class ValidazioneRecensioni extends javax.swing.JFrame {
 
             }
         ));
-        RecensioniTable.addMouseListener(new java.awt.event.MouseAdapter() {
+        ValidazioneRecensioniTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                RecensioniTableMouseClicked(evt);
+                ValidazioneRecensioniTableMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(RecensioniTable);
+        jScrollPane1.setViewportView(ValidazioneRecensioniTable);
 
         ProjectLabel.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         ProjectLabel.setForeground(new java.awt.Color(51, 51, 255));
@@ -247,17 +247,17 @@ public class ValidazioneRecensioni extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void RecensioniTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RecensioniTableMouseClicked
+    private void ValidazioneRecensioniTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ValidazioneRecensioniTableMouseClicked
         // TODO add your handling code here:
         
-        RecensioniTable.addMouseListener(new MouseAdapter() {
+        ValidazioneRecensioniTable.addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent mouseEvent) {
                 JTable table =(JTable) mouseEvent.getSource();
                 Point point = mouseEvent.getPoint();
                 int row = table.rowAtPoint(point);
                 
                 if (mouseEvent.getClickCount() == 2 && table.getSelectedRow() != -1) {
-                    String selected= RecensioniTable.getValueAt(RecensioniTable.getSelectedRow(),1).toString();
+                    String selected= ValidazioneRecensioniTable.getValueAt(ValidazioneRecensioniTable.getSelectedRow(),1).toString();
                     JTextArea textArea = new JTextArea(selected, 1, 20);
                     JScrollPane scrollpane = new JScrollPane(textArea);
                     textArea.setWrapStyleWord(true);
@@ -265,26 +265,26 @@ public class ValidazioneRecensioni extends javax.swing.JFrame {
                     textArea.setEditable(false);
                     scrollpane.setPreferredSize(new Dimension(400, 200));
                     JOptionPane.showMessageDialog(null, scrollpane, "INFO COMMENTO", JOptionPane.INFORMATION_MESSAGE);
-                    RecensioniTable.clearSelection();
+                    ValidazioneRecensioniTable.clearSelection();
                 }
             }
         });
-    }//GEN-LAST:event_RecensioniTableMouseClicked
+    }//GEN-LAST:event_ValidazioneRecensioniTableMouseClicked
 
     private void ApprovaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ApprovaButtonActionPerformed
         // TODO add your handling code here:
         
-        if(RecensioniTable.getSelectedRow()!=-1){
+        if(ValidazioneRecensioniTable.getSelectedRow()!=-1){
         
             Recensione recensione= new Recensione();
 
-            recensione.setAutore(RecensioniTable.getValueAt(RecensioniTable.getSelectedRow(), 0).toString());
-            recensione.setCommento(RecensioniTable.getValueAt(RecensioniTable.getSelectedRow(), 1).toString());
-            recensione.setPubblicata((boolean) RecensioniTable.getValueAt(RecensioniTable.getSelectedRow(), 2));
-            recensione.setStruttura(RecensioniTable.getValueAt(RecensioniTable.getSelectedRow(), 3).toString());
-            recensione.setTitolo(RecensioniTable.getValueAt(RecensioniTable.getSelectedRow(), 4).toString());
-            recensione.setUsername(RecensioniTable.getValueAt(RecensioniTable.getSelectedRow(), 5).toString());
-            recensione.setVoto((int) RecensioniTable.getValueAt(RecensioniTable.getSelectedRow(), 6));
+            recensione.setAutore(ValidazioneRecensioniTable.getValueAt(ValidazioneRecensioniTable.getSelectedRow(), 0).toString());
+            recensione.setCommento(ValidazioneRecensioniTable.getValueAt(ValidazioneRecensioniTable.getSelectedRow(), 1).toString());
+            recensione.setPubblicata((boolean) ValidazioneRecensioniTable.getValueAt(ValidazioneRecensioniTable.getSelectedRow(), 2));
+            recensione.setStruttura(ValidazioneRecensioniTable.getValueAt(ValidazioneRecensioniTable.getSelectedRow(), 3).toString());
+            recensione.setTitolo(ValidazioneRecensioniTable.getValueAt(ValidazioneRecensioniTable.getSelectedRow(), 4).toString());
+            recensione.setUsername(ValidazioneRecensioniTable.getValueAt(ValidazioneRecensioniTable.getSelectedRow(), 5).toString());
+            recensione.setVoto((int) ValidazioneRecensioniTable.getValueAt(ValidazioneRecensioniTable.getSelectedRow(), 6));
             
             ValidazioneRecensioniController.clickApprovaRecensione(recensione);
         }else{
@@ -301,17 +301,17 @@ public class ValidazioneRecensioni extends javax.swing.JFrame {
     private void EliminaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminaButtonActionPerformed
         // TODO add your handling code here:
         
-        if(RecensioniTable.getSelectedRow()!=-1){
+        if(ValidazioneRecensioniTable.getSelectedRow()!=-1){
         
             Recensione recensione= new Recensione();
 
-            recensione.setAutore(RecensioniTable.getValueAt(RecensioniTable.getSelectedRow(), 0).toString());
-            recensione.setCommento(RecensioniTable.getValueAt(RecensioniTable.getSelectedRow(), 1).toString());
-            recensione.setPubblicata((boolean) RecensioniTable.getValueAt(RecensioniTable.getSelectedRow(), 2));
-            recensione.setStruttura(RecensioniTable.getValueAt(RecensioniTable.getSelectedRow(), 3).toString());
-            recensione.setTitolo(RecensioniTable.getValueAt(RecensioniTable.getSelectedRow(), 4).toString());
-            recensione.setUsername(RecensioniTable.getValueAt(RecensioniTable.getSelectedRow(), 5).toString());
-            recensione.setVoto((int) RecensioniTable.getValueAt(RecensioniTable.getSelectedRow(), 6));
+            recensione.setAutore(ValidazioneRecensioniTable.getValueAt(ValidazioneRecensioniTable.getSelectedRow(), 0).toString());
+            recensione.setCommento(ValidazioneRecensioniTable.getValueAt(ValidazioneRecensioniTable.getSelectedRow(), 1).toString());
+            recensione.setPubblicata((boolean) ValidazioneRecensioniTable.getValueAt(ValidazioneRecensioniTable.getSelectedRow(), 2));
+            recensione.setStruttura(ValidazioneRecensioniTable.getValueAt(ValidazioneRecensioniTable.getSelectedRow(), 3).toString());
+            recensione.setTitolo(ValidazioneRecensioniTable.getValueAt(ValidazioneRecensioniTable.getSelectedRow(), 4).toString());
+            recensione.setUsername(ValidazioneRecensioniTable.getValueAt(ValidazioneRecensioniTable.getSelectedRow(), 5).toString());
+            recensione.setVoto((int) ValidazioneRecensioniTable.getValueAt(ValidazioneRecensioniTable.getSelectedRow(), 6));
             
             ValidazioneRecensioniController.clickEliminaRecensione(recensione);
         }else{
@@ -340,9 +340,9 @@ public class ValidazioneRecensioni extends javax.swing.JFrame {
     private javax.swing.JTextField OperatoreField;
     private javax.swing.JLabel OperatoreLabel;
     private javax.swing.JLabel ProjectLabel;
-    private javax.swing.JTable RecensioniTable;
     private javax.swing.JLabel ValidazioneRecensioniLabel;
     private javax.swing.JPanel ValidazioneRecensioniPanel;
+    private javax.swing.JTable ValidazioneRecensioniTable;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

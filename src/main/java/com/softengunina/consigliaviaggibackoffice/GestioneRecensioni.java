@@ -5,6 +5,7 @@
  */
 package com.softengunina.consigliaviaggibackoffice;
 
+import com.softengunina.consigliaviaggibackoffice.controllers.GestioneRecensioniController;
 import com.softengunina.consigliaviaggibackoffice.controllers.ValidazioneRecensioniController;
 import com.softengunina.consigliaviaggibackoffice.models.Amministratore;
 import com.softengunina.consigliaviaggibackoffice.models.Recensione;
@@ -43,7 +44,7 @@ public class GestioneRecensioni extends javax.swing.JFrame {
         
         OperatoreField.setText(String.valueOf(currAdmin.getID()));
         
-        List<Recensione> recensioni= ValidazioneRecensioniController.mostraRecensioni();
+        List<Recensione> recensioni= GestioneRecensioniController.mostraRecensioni();
         
         DefaultTableModel aModel = new DefaultTableModel() {
         //setting the jtable read only
@@ -65,7 +66,7 @@ public class GestioneRecensioni extends javax.swing.JFrame {
 
         aModel.setColumnIdentifiers(tableColumnNames);
         if (recensioni == null) {
-            this.RecensioniTable.setModel(aModel);
+            this.GestioneRecensioniTable.setModel(aModel);
             return;
         }
 
@@ -82,7 +83,7 @@ public class GestioneRecensioni extends javax.swing.JFrame {
             aModel.addRow(objects);
         }
         
-        this.RecensioniTable.setModel(aModel);
+        this.GestioneRecensioniTable.setModel(aModel);
     }
 
     /**
@@ -96,7 +97,7 @@ public class GestioneRecensioni extends javax.swing.JFrame {
 
         ValidazioneRecensioniPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        RecensioniTable = new javax.swing.JTable();
+        GestioneRecensioniTable = new javax.swing.JTable();
         ProjectLabel = new javax.swing.JLabel();
         CompanyLabel = new javax.swing.JLabel();
         GestioneRecensioniLabel = new javax.swing.JLabel();
@@ -114,7 +115,7 @@ public class GestioneRecensioni extends javax.swing.JFrame {
 
         ValidazioneRecensioniPanel.setBackground(new java.awt.Color(255, 255, 255));
 
-        RecensioniTable.setModel(new javax.swing.table.DefaultTableModel(
+        GestioneRecensioniTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -122,12 +123,12 @@ public class GestioneRecensioni extends javax.swing.JFrame {
 
             }
         ));
-        RecensioniTable.addMouseListener(new java.awt.event.MouseAdapter() {
+        GestioneRecensioniTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                RecensioniTableMouseClicked(evt);
+                GestioneRecensioniTableMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(RecensioniTable);
+        jScrollPane1.setViewportView(GestioneRecensioniTable);
 
         ProjectLabel.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         ProjectLabel.setForeground(new java.awt.Color(51, 51, 255));
@@ -171,7 +172,8 @@ public class GestioneRecensioni extends javax.swing.JFrame {
         });
 
         NomeStrutturaField.setBackground(new java.awt.Color(255, 255, 255));
-        NomeStrutturaField.setForeground(new java.awt.Color(51, 51, 255));
+        NomeStrutturaField.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        NomeStrutturaField.setForeground(new java.awt.Color(0, 0, 0));
         NomeStrutturaField.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(51, 51, 255)));
         NomeStrutturaField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -180,7 +182,8 @@ public class GestioneRecensioni extends javax.swing.JFrame {
         });
 
         NomeUtenteField.setBackground(new java.awt.Color(255, 255, 255));
-        NomeUtenteField.setForeground(new java.awt.Color(51, 51, 255));
+        NomeUtenteField.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        NomeUtenteField.setForeground(new java.awt.Color(0, 0, 0));
         NomeUtenteField.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(51, 51, 255)));
         NomeUtenteField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -230,17 +233,16 @@ public class GestioneRecensioni extends javax.swing.JFrame {
                                 .addComponent(OperatoreLabel)
                                 .addGap(4, 4, 4)
                                 .addComponent(OperatoreField, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(ValidazioneRecensioniPanelLayout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(EliminaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(EliminaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(ValidazioneRecensioniPanelLayout.createSequentialGroup()
                                 .addGroup(ValidazioneRecensioniPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(NomeUtenteLabel)
                                     .addComponent(NomeStrutturaLabel)
-                                    .addComponent(CercaButton, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
-                                    .addComponent(NomeUtenteField)
-                                    .addComponent(NomeStrutturaField, javax.swing.GroupLayout.Alignment.TRAILING))
-                                .addGap(65, 65, 65)
+                                    .addGroup(ValidazioneRecensioniPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(CercaButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
+                                        .addComponent(NomeUtenteField, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(NomeStrutturaField, javax.swing.GroupLayout.Alignment.LEADING)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 743, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(20, 20, 20))))
         );
@@ -267,16 +269,16 @@ public class GestioneRecensioni extends javax.swing.JFrame {
                         .addComponent(NomeUtenteLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(NomeUtenteField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)
-                        .addComponent(CercaButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(222, 222, 222)
+                        .addGap(27, 27, 27)
+                        .addComponent(CercaButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(CompanyLabel)
                         .addGap(20, 20, 20))
                     .addGroup(ValidazioneRecensioniPanelLayout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(EliminaButton)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap(71, Short.MAX_VALUE))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -293,17 +295,17 @@ public class GestioneRecensioni extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void RecensioniTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RecensioniTableMouseClicked
+    private void GestioneRecensioniTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_GestioneRecensioniTableMouseClicked
         // TODO add your handling code here:
         
-        RecensioniTable.addMouseListener(new MouseAdapter() {
+        GestioneRecensioniTable.addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent mouseEvent) {
                 JTable table =(JTable) mouseEvent.getSource();
                 Point point = mouseEvent.getPoint();
                 int row = table.rowAtPoint(point);
                 
                 if (mouseEvent.getClickCount() == 2 && table.getSelectedRow() != -1) {
-                    String selected= RecensioniTable.getValueAt(RecensioniTable.getSelectedRow(),1).toString();
+                    String selected= GestioneRecensioniTable.getValueAt(GestioneRecensioniTable.getSelectedRow(),1).toString();
                     JTextArea textArea = new JTextArea(selected, 1, 20);
                     JScrollPane scrollpane = new JScrollPane(textArea);
                     textArea.setWrapStyleWord(true);
@@ -311,26 +313,26 @@ public class GestioneRecensioni extends javax.swing.JFrame {
                     textArea.setEditable(false);
                     scrollpane.setPreferredSize(new Dimension(400, 200));
                     JOptionPane.showMessageDialog(null, scrollpane, "INFO COMMENTO", JOptionPane.INFORMATION_MESSAGE);
-                    RecensioniTable.clearSelection();
+                    GestioneRecensioniTable.clearSelection();
                 }
             }
         });
-    }//GEN-LAST:event_RecensioniTableMouseClicked
+    }//GEN-LAST:event_GestioneRecensioniTableMouseClicked
 
     private void EliminaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminaButtonActionPerformed
         // TODO add your handling code here:
         
-        if(RecensioniTable.getSelectedRow()!=-1){
+        if(GestioneRecensioniTable.getSelectedRow()!=-1){
         
             Recensione recensione= new Recensione();
 
-            recensione.setAutore(RecensioniTable.getValueAt(RecensioniTable.getSelectedRow(), 0).toString());
-            recensione.setCommento(RecensioniTable.getValueAt(RecensioniTable.getSelectedRow(), 1).toString());
-            recensione.setPubblicata((boolean) RecensioniTable.getValueAt(RecensioniTable.getSelectedRow(), 2));
-            recensione.setStruttura(RecensioniTable.getValueAt(RecensioniTable.getSelectedRow(), 3).toString());
-            recensione.setTitolo(RecensioniTable.getValueAt(RecensioniTable.getSelectedRow(), 4).toString());
-            recensione.setUsername(RecensioniTable.getValueAt(RecensioniTable.getSelectedRow(), 5).toString());
-            recensione.setVoto((int) RecensioniTable.getValueAt(RecensioniTable.getSelectedRow(), 6));
+            recensione.setAutore(GestioneRecensioniTable.getValueAt(GestioneRecensioniTable.getSelectedRow(), 0).toString());
+            recensione.setCommento(GestioneRecensioniTable.getValueAt(GestioneRecensioniTable.getSelectedRow(), 1).toString());
+            recensione.setPubblicata((boolean) GestioneRecensioniTable.getValueAt(GestioneRecensioniTable.getSelectedRow(), 2));
+            recensione.setStruttura(GestioneRecensioniTable.getValueAt(GestioneRecensioniTable.getSelectedRow(), 3).toString());
+            recensione.setTitolo(GestioneRecensioniTable.getValueAt(GestioneRecensioniTable.getSelectedRow(), 4).toString());
+            recensione.setUsername(GestioneRecensioniTable.getValueAt(GestioneRecensioniTable.getSelectedRow(), 5).toString());
+            recensione.setVoto((int) GestioneRecensioniTable.getValueAt(GestioneRecensioniTable.getSelectedRow(), 6));
             
             ValidazioneRecensioniController.clickEliminaRecensione(recensione);
         }else{
@@ -346,7 +348,7 @@ public class GestioneRecensioni extends javax.swing.JFrame {
 
     private void IndietroLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_IndietroLabelMouseClicked
         // TODO add your handling code here:
-        ValidazioneRecensioniController.clickIndietro(admin);
+        GestioneRecensioniController.clickIndietro(admin);
         this.dispose();        
     }//GEN-LAST:event_IndietroLabelMouseClicked
 
@@ -360,6 +362,66 @@ public class GestioneRecensioni extends javax.swing.JFrame {
 
     private void CercaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CercaButtonActionPerformed
         // TODO add your handling code here:
+        if(NomeStrutturaField.getText().isEmpty() && NomeUtenteField.getText().isEmpty()){
+            UIManager.put("OptionPane.messageFont", new Font("Century Gothic", Font.BOLD, 18));
+            UIManager.put("OptionPane.buttonFont", new Font("Century Gothic", Font.ITALIC, 16));
+            JOptionPane.showMessageDialog(null,"Compilare almeno un campo!","ATTENZIONE!", JOptionPane.ERROR_MESSAGE);
+            
+        }else{
+            
+            Recensione recensione= new Recensione();
+
+            recensione.setStruttura(NomeStrutturaField.getText());
+            recensione.setUsername(NomeUtenteField.getText());
+            
+            List<Recensione> recensioni= GestioneRecensioniController.clickCercaRecensione(recensione);
+            
+            //GestioneRecensioniTable.setModel(null);
+        
+            DefaultTableModel aModel = new DefaultTableModel() {
+            //setting the jtable read only
+
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }};
+
+            //setting the column name
+            Object[] tableColumnNames = new Object[7];
+            tableColumnNames[0]= "Autore";
+            tableColumnNames[1]= "Commento";
+            tableColumnNames[2]= "Pubblicata";
+            tableColumnNames[3]= "Struttura";
+            tableColumnNames[4]= "Titolo";
+            tableColumnNames[5]= "Username";
+            tableColumnNames[6]= "Voto";
+
+            aModel.setColumnIdentifiers(tableColumnNames);
+            if (recensioni == null) {
+                this.GestioneRecensioniTable.setModel(aModel);
+                return;
+            }
+
+            Object[] objects = new Object[7];
+            for(int i=0; i<recensioni.size(); i++){
+                objects[0]= recensioni.get(i).getAutore();
+                objects[1]= recensioni.get(i).getCommento();
+                objects[2]= recensioni.get(i).getPubblicata();
+                objects[3]= recensioni.get(i).getStruttura();
+                objects[4]= recensioni.get(i).getTitolo();
+                objects[5]= recensioni.get(i).getUsername();
+                objects[6]= recensioni.get(i).getVoto();
+
+                aModel.addRow(objects);
+            }
+            
+            this.GestioneRecensioniTable.setModel(aModel);
+            
+        }
+        
+        //this.dispose();
+        //ValidazioneRecensioni newFrame = new ValidazioneRecensioni(admin);
+        //newFrame.setVisible(true);
     }//GEN-LAST:event_CercaButtonActionPerformed
 
 
@@ -368,6 +430,7 @@ public class GestioneRecensioni extends javax.swing.JFrame {
     private javax.swing.JLabel CompanyLabel;
     private javax.swing.JToggleButton EliminaButton;
     private javax.swing.JLabel GestioneRecensioniLabel;
+    private javax.swing.JTable GestioneRecensioniTable;
     private javax.swing.JLabel IndietroLabel;
     private javax.swing.JTextField NomeStrutturaField;
     private javax.swing.JLabel NomeStrutturaLabel;
@@ -376,7 +439,6 @@ public class GestioneRecensioni extends javax.swing.JFrame {
     private javax.swing.JTextField OperatoreField;
     private javax.swing.JLabel OperatoreLabel;
     private javax.swing.JLabel ProjectLabel;
-    private javax.swing.JTable RecensioniTable;
     private javax.swing.JPanel ValidazioneRecensioniPanel;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables

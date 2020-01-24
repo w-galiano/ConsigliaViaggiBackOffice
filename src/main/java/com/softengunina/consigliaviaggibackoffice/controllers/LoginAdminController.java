@@ -50,10 +50,6 @@ public class LoginAdminController {
                 new AdminHome(amministratoriList.get(0)).setVisible(true);
                 
                 return true;
-            }else{
-                UIManager.put("OptionPane.messageFont", new Font("Century Gothic", Font.BOLD, 18));
-                UIManager.put("OptionPane.buttonFont", new Font("Century Gothic", Font.ITALIC, 16));
-                JOptionPane.showMessageDialog(null,"Le credenziali inserite sono errate","ATTENZIONE!", JOptionPane.ERROR_MESSAGE);
             }
         } catch (IOException | InterruptedException | ExecutionException ex) {
             Logger.getLogger(LoginAdmin.class.getName()).log(Level.SEVERE, null, ex);

@@ -141,21 +141,22 @@ public class LoginAdmin extends javax.swing.JFrame {
 
     private void AccediButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AccediButtonActionPerformed
         // TODO add your handling code here:
-
-        if(!IDField.getText().equals("")) {
-            if (!PasswordField.getText().equals("")) {
-                if(LoginAdminController.clickLogin(Integer.parseInt(IDField.getText()), PasswordField.getText()) == true){
-                    this.dispose();
-                }else{
-                    IDField.setText("");
-                    PasswordField.setText("");
-                }
-            }
-        }else{
+        
+        if(IDField.getText().isEmpty() || PasswordField.getText().isEmpty()){
             UIManager.put("OptionPane.messageFont", new Font("Century Gothic", Font.BOLD, 18));
             UIManager.put("OptionPane.buttonFont", new Font("Century Gothic", Font.ITALIC, 16));
             JOptionPane.showMessageDialog(null,"Compilare tutti i campi!","ATTENZIONE!", JOptionPane.ERROR_MESSAGE);
-        }        
+        }else{
+            if(LoginAdminController.clickLogin(Integer.parseInt(IDField.getText()), PasswordField.getText()) == true){
+                this.dispose();
+            }else{
+                UIManager.put("OptionPane.messageFont", new Font("Century Gothic", Font.BOLD, 18));
+                UIManager.put("OptionPane.buttonFont", new Font("Century Gothic", Font.ITALIC, 16));
+                JOptionPane.showMessageDialog(null,"Credenziali errate, riprovare!","ATTENZIONE!", JOptionPane.ERROR_MESSAGE);
+                IDField.setText("");
+                PasswordField.setText("");
+            }
+        }      
     }//GEN-LAST:event_AccediButtonActionPerformed
 
     /**
