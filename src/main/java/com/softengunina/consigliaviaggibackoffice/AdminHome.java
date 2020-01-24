@@ -197,7 +197,7 @@ public class AdminHome extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.dispose();
         
-        AdminHomeController.clickGestisciRecensioni();
+        AdminHomeController.clickGestisciRecensioni(admin);
     }//GEN-LAST:event_GestisciRecensioniButtonActionPerformed
 
     private void GestisciUtentiButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GestisciUtentiButtonActionPerformed

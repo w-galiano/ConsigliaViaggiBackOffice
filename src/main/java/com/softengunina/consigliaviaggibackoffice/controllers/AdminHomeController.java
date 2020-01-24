@@ -5,6 +5,7 @@
  */
 package com.softengunina.consigliaviaggibackoffice.controllers;
 
+import com.softengunina.consigliaviaggibackoffice.GestioneRecensioni;
 import com.softengunina.consigliaviaggibackoffice.GestioneUtenti;
 import com.softengunina.consigliaviaggibackoffice.LoginAdmin;
 import com.softengunina.consigliaviaggibackoffice.ValidazioneRecensioni;
@@ -20,8 +21,8 @@ public class AdminHomeController {
         new LoginAdmin().setVisible(true);
     }
     
-    public static void clickGestisciRecensioni(){
-        
+    public static void clickGestisciRecensioni(Amministratore admin){
+        new GestioneRecensioni(admin).setVisible(true);
     }
     
     public static void clickGestisciUtenti(Amministratore admin){

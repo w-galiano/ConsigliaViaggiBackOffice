@@ -6,20 +6,11 @@
 package com.softengunina.consigliaviaggibackoffice;
 
 import com.softengunina.consigliaviaggibackoffice.controllers.GestioneUtentiController;
-import com.softengunina.consigliaviaggibackoffice.controllers.ValidazioneRecensioniController;
 import com.softengunina.consigliaviaggibackoffice.models.Amministratore;
-import com.softengunina.consigliaviaggibackoffice.models.Recensione;
 import com.softengunina.consigliaviaggibackoffice.models.Utente;
-import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Point;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.util.List;
 import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.JTextArea;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 
@@ -248,27 +239,7 @@ public class GestioneUtenti extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void UtentiTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_UtentiTableMouseClicked
-        // TODO add your handling code here:
-        
-        /*UtentiTable.addMouseListener(new MouseAdapter() {
-            /*public void mousePressed(MouseEvent mouseEvent) {
-                JTable table =(JTable) mouseEvent.getSource();
-                Point point = mouseEvent.getPoint();
-                int row = table.rowAtPoint(point);
-                
-                if (mouseEvent.getClickCount() == 2 && table.getSelectedRow() != -1) {
-                    String selected= UtentiTable.getValueAt(UtentiTable.getSelectedRow(),UtentiTable.getSelectedColumn()).toString();
-                    JTextArea textArea = new JTextArea(selected, 1, 20);
-                    JScrollPane scrollpane = new JScrollPane(textArea);
-                    textArea.setWrapStyleWord(true);
-                    textArea.setLineWrap(true);
-                    textArea.setEditable(true);
-                    scrollpane.setPreferredSize(new Dimension(400, 200));
-                    JOptionPane.showMessageDialog(null, scrollpane, "INFO COMMENTO", JOptionPane.INFORMATION_MESSAGE);
-                    UtentiTable.clearSelection();
-                }
-            }
-        });*/
+        // TODO add your handling code here:        
     }//GEN-LAST:event_UtentiTableMouseClicked
 
     private void ConfermaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfermaButtonActionPerformed
@@ -325,7 +296,7 @@ public class GestioneUtenti extends javax.swing.JFrame {
 
     private void IndietroLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_IndietroLabelMouseClicked
         // TODO add your handling code here:
-        ValidazioneRecensioniController.clickIndietro(admin);
+        GestioneUtentiController.clickIndietro(admin);
         this.dispose();        
     }//GEN-LAST:event_IndietroLabelMouseClicked
 
