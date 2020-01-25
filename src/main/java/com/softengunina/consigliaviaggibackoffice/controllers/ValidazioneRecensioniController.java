@@ -10,6 +10,7 @@ import com.google.cloud.firestore.DocumentReference;
 import com.google.cloud.firestore.Firestore;
 import com.google.cloud.firestore.QueryDocumentSnapshot;
 import com.google.cloud.firestore.QuerySnapshot;
+import com.google.cloud.firestore.WriteBatch;
 import com.softengunina.consigliaviaggibackoffice.AdminHome;
 import com.softengunina.consigliaviaggibackoffice.Connessione;
 import com.softengunina.consigliaviaggibackoffice.LoginAdmin;
@@ -79,7 +80,8 @@ public class ValidazioneRecensioniController {
     
     public static void clickApprovaRecensione(Recensione recensione) {
         try{
-           Firestore dbconn= Connessione.nuovaConnessione();           
+           Firestore dbconn= Connessione.nuovaConnessione();
+           WriteBatch batch = dbconn.batch();
            
            ApiFuture<QuerySnapshot> qlist2= dbconn.collection("Strutture").whereEqualTo("nome", recensione.getStruttura()).get();           
            
@@ -103,9 +105,10 @@ public class ValidazioneRecensioniController {
            }
            
             DocumentReference docRef = dbconn.collection("Recensioni").document(daApprovare);
-            docRef.update("pubblicata", true);
-            
+            batch.update(docRef, "pubblicata", true);            
+            batch.commit();
             //aggiornamento valutazione media
+            WriteBatch batch2 = dbconn.batch();
             ApiFuture<QuerySnapshot> qlist3= dbconn.collection("Recensioni").whereEqualTo("struttura", indirizzo).whereEqualTo("pubblicata", true).get();
             List<QueryDocumentSnapshot> docs3= qlist3.get().getDocuments();
             
@@ -125,7 +128,8 @@ public class ValidazioneRecensioniController {
             valutazione_tot= valutazione_tot;
             
             docRef = dbconn.collection("Strutture").document(docStruttura);
-            docRef.update("valutazione_media", valutazione_tot);  
+            batch2.update(docRef, "valutazione_media", valutazione_tot);
+            batch2.commit();
         } catch (IOException | InterruptedException | ExecutionException ex) {
             Logger.getLogger(LoginAdmin.class.getName()).log(Level.SEVERE, null, ex);
         }

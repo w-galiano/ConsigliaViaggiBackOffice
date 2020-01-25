@@ -334,7 +334,7 @@ public class GestioneRecensioni extends javax.swing.JFrame {
             recensione.setUsername(GestioneRecensioniTable.getValueAt(GestioneRecensioniTable.getSelectedRow(), 5).toString());
             recensione.setVoto((int) GestioneRecensioniTable.getValueAt(GestioneRecensioniTable.getSelectedRow(), 6));
             
-            ValidazioneRecensioniController.clickEliminaRecensione(recensione);
+            GestioneRecensioniController.clickEliminaRecensione(recensione);
         }else{
             UIManager.put("OptionPane.messageFont", new Font("Century Gothic", Font.BOLD, 18));
             UIManager.put("OptionPane.buttonFont", new Font("Century Gothic", Font.ITALIC, 16));
@@ -418,10 +418,6 @@ public class GestioneRecensioni extends javax.swing.JFrame {
             this.GestioneRecensioniTable.setModel(aModel);
             
         }
-        
-        //this.dispose();
-        //ValidazioneRecensioni newFrame = new ValidazioneRecensioni(admin);
-        //newFrame.setVisible(true);
     }//GEN-LAST:event_CercaButtonActionPerformed
 
 
