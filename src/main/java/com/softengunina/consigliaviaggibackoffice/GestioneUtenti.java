@@ -5,22 +5,29 @@
  */
 package com.softengunina.consigliaviaggibackoffice;
 
+import com.google.firebase.auth.FirebaseAuthException;
 import com.softengunina.consigliaviaggibackoffice.controllers.GestioneUtentiController;
 import com.softengunina.consigliaviaggibackoffice.models.Amministratore;
 import com.softengunina.consigliaviaggibackoffice.models.Utente;
 import java.awt.Font;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.regex.Matcher; 
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
+
 
 /**
  *
  * @author Walter Galiano
  */
 public class GestioneUtenti extends javax.swing.JFrame {
-    
     private Amministratore admin;
+    private List<Utente> utenti= new ArrayList<>();
     
     /**
      * Creates new form ValidaRecensioni
@@ -36,6 +43,8 @@ public class GestioneUtenti extends javax.swing.JFrame {
         OperatoreField.setText(String.valueOf(currAdmin.getID()));
         
         List<Utente> utenti= GestioneUtentiController.mostraUtenti();
+        
+        this.utenti= utenti;
         
         DefaultTableModel aModel = new DefaultTableModel() {
         //setting the jtable read only
@@ -73,6 +82,26 @@ public class GestioneUtenti extends javax.swing.JFrame {
         }
         
         this.UtentiTable.setModel(aModel);
+    }
+    
+    public static boolean isValidEmail(String email){ 
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\."+ 
+                            "[a-zA-Z0-9_+&*-]+)*@" + 
+                            "(?:[a-zA-Z0-9-]+\\.)+[a-z" + 
+                            "A-Z]{2,7}$"; 
+
+        Pattern pat = Pattern.compile(emailRegex); 
+        if (email == null) 
+            return false; 
+        return pat.matcher(email).matches(); 
+    }
+    
+    public static boolean isInvalidText(String text){ 
+        String textRegex = "^.*\\s$";
+        Pattern pat = Pattern.compile(textRegex); 
+        if (text == null) 
+            return false; 
+        return pat.matcher(text).matches(); 
     }
 
     /**
@@ -256,16 +285,56 @@ public class GestioneUtenti extends javax.swing.JFrame {
             utente.setDomanda_segreta(UtentiTable.getValueAt(UtentiTable.getSelectedRow(), 4).toString());
             utente.setRisposta(UtentiTable.getValueAt(UtentiTable.getSelectedRow(), 5).toString());
             
-            GestioneUtentiController.clickConfermaModificaUtente(utente);
+            if(utente.getNome().isEmpty() || utente.getCognome().isEmpty() || utente.getEmail().isEmpty() || utente.getUsername().isEmpty() || utente.getDomanda_segreta().isEmpty()
+                || utente.getRisposta().isEmpty()){
+                
+                UIManager.put("OptionPane.messageFont", new Font("Century Gothic", Font.BOLD, 18));
+                UIManager.put("OptionPane.buttonFont", new Font("Century Gothic", Font.ITALIC, 16));
+                JOptionPane.showMessageDialog(null,"Non lasciare campi vuoti 1 !","ATTENZIONE!", JOptionPane.ERROR_MESSAGE);
+                
+                return;
+            }
+            
+            if(isInvalidText(utente.getNome()) || isInvalidText(utente.getCognome()) || isInvalidText(utente.getEmail()) || isInvalidText(utente.getUsername()) || isInvalidText(utente.getDomanda_segreta())
+                || isInvalidText(utente.getRisposta())){
+                
+                UIManager.put("OptionPane.messageFont", new Font("Century Gothic", Font.BOLD, 18));
+                UIManager.put("OptionPane.buttonFont", new Font("Century Gothic", Font.ITALIC, 16));
+                JOptionPane.showMessageDialog(null,"Non lasciare campi vuoti!","ATTENZIONE!", JOptionPane.ERROR_MESSAGE);
+                
+                return;
+            }
+            
+            if(!isValidEmail(UtentiTable.getValueAt(UtentiTable.getSelectedRow(), 3).toString())){
+                UIManager.put("OptionPane.messageFont", new Font("Century Gothic", Font.BOLD, 18));
+                UIManager.put("OptionPane.buttonFont", new Font("Century Gothic", Font.ITALIC, 16));
+                JOptionPane.showMessageDialog(null,"Formato email non valido!","ATTENZIONE!", JOptionPane.ERROR_MESSAGE);
+                
+                return;
+            }
+            
+            
+            
+            try {
+                if(GestioneUtentiController.clickConfermaModificaUtente(utente, this.utenti.get(UtentiTable.getSelectedRow()))==-1){
+                    UIManager.put("OptionPane.messageFont", new Font("Century Gothic", Font.BOLD, 18));
+                    UIManager.put("OptionPane.buttonFont", new Font("Century Gothic", Font.ITALIC, 16));
+                    JOptionPane.showMessageDialog(null,"Nessun campo modificato!","ATTENZIONE!", JOptionPane.ERROR_MESSAGE);
+                }
+            } catch (FirebaseAuthException ex) {
+                Logger.getLogger(GestioneUtenti.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            this.dispose();
+            GestioneUtenti newFrame = new GestioneUtenti(admin);
+            newFrame.setVisible(true);
         }else{
             UIManager.put("OptionPane.messageFont", new Font("Century Gothic", Font.BOLD, 18));
             UIManager.put("OptionPane.buttonFont", new Font("Century Gothic", Font.ITALIC, 16));
             JOptionPane.showMessageDialog(null,"Nessuna riga selezionata","ATTENZIONE!", JOptionPane.ERROR_MESSAGE);
         }
         
-        this.dispose();
-        GestioneUtenti newFrame = new GestioneUtenti(admin);
-        newFrame.setVisible(true);
+        
     }//GEN-LAST:event_ConfermaButtonActionPerformed
 
     private void EliminaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminaButtonActionPerformed

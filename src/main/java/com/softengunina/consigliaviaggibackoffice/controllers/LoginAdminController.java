@@ -7,22 +7,18 @@ package com.softengunina.consigliaviaggibackoffice.controllers;
 
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.Firestore;
-import com.google.cloud.firestore.Query;
 import com.google.cloud.firestore.QueryDocumentSnapshot;
 import com.google.cloud.firestore.QuerySnapshot;
 import com.softengunina.consigliaviaggibackoffice.AdminHome;
 import com.softengunina.consigliaviaggibackoffice.Connessione;
 import com.softengunina.consigliaviaggibackoffice.LoginAdmin;
 import com.softengunina.consigliaviaggibackoffice.models.Amministratore;
-import java.awt.Font;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
-import javax.swing.UIManager;
 
 /**
  *

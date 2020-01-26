@@ -11,11 +11,14 @@ import com.google.cloud.firestore.Firestore;
 import com.google.cloud.firestore.QueryDocumentSnapshot;
 import com.google.cloud.firestore.QuerySnapshot;
 import com.google.cloud.firestore.WriteBatch;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthException;
+import com.google.firebase.auth.UserRecord;
+import com.google.firebase.auth.UserRecord.UpdateRequest;
 import com.softengunina.consigliaviaggibackoffice.AdminHome;
 import com.softengunina.consigliaviaggibackoffice.Connessione;
 import com.softengunina.consigliaviaggibackoffice.LoginAdmin;
 import com.softengunina.consigliaviaggibackoffice.models.Amministratore;
-import com.softengunina.consigliaviaggibackoffice.models.Recensione;
 import com.softengunina.consigliaviaggibackoffice.models.Struttura;
 import com.softengunina.consigliaviaggibackoffice.models.Utente;
 import java.io.IOException;
@@ -60,48 +63,97 @@ public class GestioneUtentiController {
         return null;
     }
     
-    public static void clickConfermaModificaUtente(Utente utente) {
+    public static int clickConfermaModificaUtente(Utente utente, Utente oldUtente) throws FirebaseAuthException {
         try{
+            boolean flag= false;
+            UserRecord userRecord = FirebaseAuth.getInstance().getUserByEmail(oldUtente.getEmail());
+            
             Firestore dbconn= Connessione.nuovaConnessione();
-            WriteBatch batch = dbconn.batch();           
+            WriteBatch batch= dbconn.batch(); 
+            WriteBatch batch2= dbconn.batch();
+            String docUtente= null;            
 
-            ApiFuture<QuerySnapshot> qlist= dbconn.collection("Utenti").whereEqualTo("email", utente.getEmail()).get();
-            ApiFuture<QuerySnapshot> qlist2= dbconn.collection("Recensioni").whereEqualTo("username", utente.getUsername()).get();
-
+            ApiFuture<QuerySnapshot> qlist= dbconn.collection("Utenti").whereEqualTo("username", oldUtente.getUsername()).get();
+            ApiFuture<QuerySnapshot> qlist2= dbconn.collection("Recensioni").whereEqualTo("username", oldUtente.getUsername()).get();
+            
             List<QueryDocumentSnapshot> docs= qlist.get().getDocuments();
             List<QueryDocumentSnapshot> docs2= qlist2.get().getDocuments();
-
-            String docUtente= null;
-
+            
             for(QueryDocumentSnapshot document: docs){
-                 docUtente= document.getId();
+                docUtente= document.getId();
             }
-
+            
             DocumentReference docRef= dbconn.collection("Utenti").document(docUtente);
             
-            batch.update(docRef, "nome", utente.getNome());
-            batch.update(docRef, "cognome", utente.getCognome());
-            batch.update(docRef, "email", utente.getEmail());
-            batch.update(docRef, "username", utente.getUsername());
-            batch.update(docRef, "domanda_segreta", utente.getDomanda_segreta());
-            batch.update(docRef, "risposta", utente.getRisposta());
-            
-            batch.commit();
-            
-            //aggiornamento dell'username all'interno delle recensioni
-            List<String> docList = new ArrayList<>();
-            
-            for(QueryDocumentSnapshot document: docs2){
-                docList.add(document.getId());
+            if(!utente.getNome().equals(oldUtente.getNome())){
+                batch.update(docRef, "nome", utente.getNome());
+                flag= true;
             }
             
-            for(int i=0;i<docList.size();i++){
-                docRef= dbconn.collection("Recensioni").document(docList.get(i));
-                docRef.update("username", utente.getUsername());
+            if(!utente.getCognome().equals(oldUtente.getCognome())){
+                batch.update(docRef, "cognome", utente.getCognome());
+                flag= true;
+            }
+            
+            if(!utente.getUsername().equals(oldUtente.getUsername())){
+                batch.update(docRef, "username", utente.getUsername());
+                flag= true;
+            }
+            
+            if(!utente.getDomanda_segreta().equals(oldUtente.getDomanda_segreta())){
+                batch.update(docRef, "domanda_segreta", utente.getDomanda_segreta());
+                flag= true;
+            }
+            
+            if(!utente.getRisposta().equals(oldUtente.getRisposta())){
+                batch.update(docRef, "risposta", utente.getRisposta());
+                flag= true;
+            }
+            
+            if(!utente.getEmail().equals(oldUtente.getEmail())){
+                batch.update(docRef, "email", utente.getEmail());
+                UpdateRequest request = new UpdateRequest(userRecord.getUid())
+                    .setEmail(utente.getEmail());
+
+                FirebaseAuth.getInstance().updateUser(request);
+                flag= true;
+            }
+            
+            if(flag){
+                batch.commit();
+            }
+            
+            boolean flag2= false;
+            
+            for(QueryDocumentSnapshot document: docs2){
+                DocumentReference docRef2= dbconn.collection("Recensioni").document(document.getId());
+                
+                if(!document.get("username").equals(utente.getUsername())){
+                    batch2.update(docRef2, "username", utente.getUsername());
+                }
+                
+                if(document.get("autore").equals(oldUtente.getNome()+" "+oldUtente.getCognome())){
+                    if(!utente.getNome().equals(oldUtente.getNome()) || !utente.getCognome().equals(oldUtente.getCognome())){
+                        batch2.update(docRef2, "autore", utente.getNome()+" "+utente.getCognome());
+                        flag2= true;
+                    }
+                }else{
+                    batch2.update(docRef2, "autore", utente.getUsername());
+                    flag2= true;
+                }
+            }
+            
+            if(flag2){
+                batch2.commit();
+            }
+            
+            if(flag || flag2){
+                return 1;
             }
         } catch (IOException | InterruptedException | ExecutionException ex) {
             Logger.getLogger(LoginAdmin.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return -1;
     }
     
     public static void clickEliminaUtente(Utente utente){
@@ -184,16 +236,13 @@ public class GestioneUtentiController {
 
                 if(valutazioni.isEmpty()){
                     docRef2 = dbconn.collection("Strutture").document(struttureDaAggiornare.get(i));
-                    docRef2.update("valutazione_media", 0);
+                    batch3.update(docRef2, "valutazione_media", 0);
                     return;
                 }
 
                 for(int j=0;j<valutazioni.size();j++){
                     valutazione_tot+= valutazioni.get(j);
-                    System.out.println(valutazione_tot);
                 }
-
-                System.out.println(valutazioni.size());
 
                 valutazione_tot= valutazione_tot/valutazioni.size();
                 valutazione_tot= valutazione_tot;
