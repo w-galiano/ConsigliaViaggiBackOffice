@@ -13,7 +13,7 @@ import com.google.cloud.firestore.QuerySnapshot;
 import com.google.cloud.firestore.WriteBatch;
 import com.softengunina.consigliaviaggibackoffice.AdminHome;
 import com.softengunina.consigliaviaggibackoffice.Connessione;
-import com.softengunina.consigliaviaggibackoffice.LoginAdmin;
+import com.softengunina.consigliaviaggibackoffice.AdminLogin;
 import com.softengunina.consigliaviaggibackoffice.models.Amministratore;
 import com.softengunina.consigliaviaggibackoffice.models.Recensione;
 import com.softengunina.consigliaviaggibackoffice.models.Struttura;
@@ -73,7 +73,7 @@ public class ValidazioneRecensioniController {
                 return recensioniList;
             }   
         } catch (IOException | InterruptedException | ExecutionException ex) {
-            Logger.getLogger(LoginAdmin.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AdminLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
@@ -131,13 +131,14 @@ public class ValidazioneRecensioniController {
             batch2.update(docRef, "valutazione_media", valutazione_tot);
             batch2.commit();
         } catch (IOException | InterruptedException | ExecutionException ex) {
-            Logger.getLogger(LoginAdmin.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AdminLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
     public static void clickEliminaRecensione(Recensione recensione){
         try{
-           Firestore dbconn= Connessione.nuovaConnessione();           
+           Firestore dbconn= Connessione.nuovaConnessione();   
+           WriteBatch batch = dbconn.batch();
            
            ApiFuture<QuerySnapshot> qlist2= dbconn.collection("Strutture").whereEqualTo("nome", recensione.getStruttura()).get();           
            
@@ -159,9 +160,10 @@ public class ValidazioneRecensioniController {
            }
            
             DocumentReference docRef = dbconn.collection("Recensioni").document(daEliminare);
-            docRef.delete(); 
+            batch.delete(docRef); 
+            batch.commit();
         } catch (IOException | InterruptedException | ExecutionException ex) {
-            Logger.getLogger(LoginAdmin.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AdminLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     

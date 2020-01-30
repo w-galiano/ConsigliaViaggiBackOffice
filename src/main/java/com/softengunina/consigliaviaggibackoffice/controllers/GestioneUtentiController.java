@@ -17,7 +17,7 @@ import com.google.firebase.auth.UserRecord;
 import com.google.firebase.auth.UserRecord.UpdateRequest;
 import com.softengunina.consigliaviaggibackoffice.AdminHome;
 import com.softengunina.consigliaviaggibackoffice.Connessione;
-import com.softengunina.consigliaviaggibackoffice.LoginAdmin;
+import com.softengunina.consigliaviaggibackoffice.AdminLogin;
 import com.softengunina.consigliaviaggibackoffice.models.Amministratore;
 import com.softengunina.consigliaviaggibackoffice.models.Struttura;
 import com.softengunina.consigliaviaggibackoffice.models.Utente;
@@ -58,7 +58,7 @@ public class GestioneUtentiController {
                 return utentiList;
             }   
         } catch (IOException | InterruptedException | ExecutionException ex) {
-            Logger.getLogger(LoginAdmin.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AdminLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
@@ -151,7 +151,7 @@ public class GestioneUtentiController {
                 return 1;
             }
         } catch (IOException | InterruptedException | ExecutionException ex) {
-            Logger.getLogger(LoginAdmin.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AdminLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
         return -1;
     }
@@ -253,7 +253,7 @@ public class GestioneUtentiController {
             }
             
         } catch (IOException | InterruptedException | ExecutionException ex) {
-            Logger.getLogger(LoginAdmin.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AdminLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     

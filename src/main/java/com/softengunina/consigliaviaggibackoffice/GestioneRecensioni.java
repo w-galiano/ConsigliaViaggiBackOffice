@@ -6,7 +6,6 @@
 package com.softengunina.consigliaviaggibackoffice;
 
 import com.softengunina.consigliaviaggibackoffice.controllers.GestioneRecensioniController;
-import com.softengunina.consigliaviaggibackoffice.controllers.ValidazioneRecensioniController;
 import com.softengunina.consigliaviaggibackoffice.models.Amministratore;
 import com.softengunina.consigliaviaggibackoffice.models.Recensione;
 import java.awt.Dimension;
@@ -19,7 +18,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
-import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 

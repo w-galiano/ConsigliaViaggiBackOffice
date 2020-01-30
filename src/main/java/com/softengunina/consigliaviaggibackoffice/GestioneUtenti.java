@@ -97,11 +97,17 @@ public class GestioneUtenti extends javax.swing.JFrame {
     }
     
     public static boolean isInvalidText(String text){ 
-        String textRegex = "^.*\\s$";
-        Pattern pat = Pattern.compile(textRegex); 
-        if (text == null) 
-            return false; 
-        return pat.matcher(text).matches(); 
+        String textRegex = "^\\s.*";
+        String textRegex2= ".*\\s\\s.*";
+        String textRegex3= ".*\\s$";
+        Pattern pat = Pattern.compile(textRegex);
+        Pattern pat2 = Pattern.compile(textRegex2);
+        Pattern pat3 = Pattern.compile(textRegex3);
+        if (text.isEmpty()){
+            return false;
+        }
+        
+        return pat.matcher(text).matches() || pat2.matcher(text).matches() || pat3.matcher(text).matches(); 
     }
 
     /**
@@ -300,7 +306,7 @@ public class GestioneUtenti extends javax.swing.JFrame {
                 
                 UIManager.put("OptionPane.messageFont", new Font("Century Gothic", Font.BOLD, 18));
                 UIManager.put("OptionPane.buttonFont", new Font("Century Gothic", Font.ITALIC, 16));
-                JOptionPane.showMessageDialog(null,"Non lasciare campi vuoti!","ATTENZIONE!", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null,"Stringa non valida!","ATTENZIONE!", JOptionPane.ERROR_MESSAGE);
                 
                 return;
             }

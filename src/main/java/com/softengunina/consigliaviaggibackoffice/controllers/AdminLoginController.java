@@ -11,7 +11,7 @@ import com.google.cloud.firestore.QueryDocumentSnapshot;
 import com.google.cloud.firestore.QuerySnapshot;
 import com.softengunina.consigliaviaggibackoffice.AdminHome;
 import com.softengunina.consigliaviaggibackoffice.Connessione;
-import com.softengunina.consigliaviaggibackoffice.LoginAdmin;
+import com.softengunina.consigliaviaggibackoffice.AdminLogin;
 import com.softengunina.consigliaviaggibackoffice.models.Amministratore;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -24,7 +24,7 @@ import java.util.logging.Logger;
  *
  * @author Walter Galiano
  */
-public class LoginAdminController {
+public class AdminLoginController {
     
     public static boolean clickLogin(int id, String password) {
         
@@ -48,7 +48,7 @@ public class LoginAdminController {
                 return true;
             }
         } catch (IOException | InterruptedException | ExecutionException ex) {
-            Logger.getLogger(LoginAdmin.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AdminLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
     }
