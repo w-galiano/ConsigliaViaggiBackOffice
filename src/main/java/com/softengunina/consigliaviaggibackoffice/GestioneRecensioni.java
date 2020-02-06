@@ -42,6 +42,10 @@ public class GestioneRecensioni extends javax.swing.JFrame {
         
         OperatoreField.setText(String.valueOf(currAdmin.getID()));
         
+        RiempiTabella();
+    }
+    
+    public void RiempiTabella(){
         List<Recensione> recensioni= GestioneRecensioniController.mostraRecensioni();
         
         DefaultTableModel aModel = new DefaultTableModel() {
@@ -108,6 +112,7 @@ public class GestioneRecensioni extends javax.swing.JFrame {
         NomeStrutturaLabel = new javax.swing.JLabel();
         NomeUtenteLabel = new javax.swing.JLabel();
         CercaButton = new javax.swing.JButton();
+        ResetButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -169,9 +174,7 @@ public class GestioneRecensioni extends javax.swing.JFrame {
             }
         });
 
-        NomeStrutturaField.setBackground(new java.awt.Color(255, 255, 255));
         NomeStrutturaField.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        NomeStrutturaField.setForeground(new java.awt.Color(0, 0, 0));
         NomeStrutturaField.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(51, 51, 255)));
         NomeStrutturaField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -179,9 +182,7 @@ public class GestioneRecensioni extends javax.swing.JFrame {
             }
         });
 
-        NomeUtenteField.setBackground(new java.awt.Color(255, 255, 255));
         NomeUtenteField.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        NomeUtenteField.setForeground(new java.awt.Color(0, 0, 0));
         NomeUtenteField.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(51, 51, 255)));
         NomeUtenteField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -196,7 +197,7 @@ public class GestioneRecensioni extends javax.swing.JFrame {
 
         NomeUtenteLabel.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         NomeUtenteLabel.setForeground(new java.awt.Color(51, 51, 255));
-        NomeUtenteLabel.setText("Nome utente");
+        NomeUtenteLabel.setText("Username");
 
         CercaButton.setBackground(new java.awt.Color(51, 51, 255));
         CercaButton.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
@@ -205,6 +206,16 @@ public class GestioneRecensioni extends javax.swing.JFrame {
         CercaButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CercaButtonActionPerformed(evt);
+            }
+        });
+
+        ResetButton.setBackground(new java.awt.Color(51, 204, 0));
+        ResetButton.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        ResetButton.setForeground(new java.awt.Color(255, 255, 255));
+        ResetButton.setText("RESET");
+        ResetButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ResetButtonActionPerformed(evt);
             }
         });
 
@@ -233,13 +244,13 @@ public class GestioneRecensioni extends javax.swing.JFrame {
                                 .addComponent(OperatoreField, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(EliminaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(ValidazioneRecensioniPanelLayout.createSequentialGroup()
-                                .addGroup(ValidazioneRecensioniPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(ValidazioneRecensioniPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(NomeUtenteLabel)
                                     .addComponent(NomeStrutturaLabel)
-                                    .addGroup(ValidazioneRecensioniPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(CercaButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
-                                        .addComponent(NomeUtenteField, javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(NomeStrutturaField, javax.swing.GroupLayout.Alignment.LEADING)))
+                                    .addComponent(CercaButton, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
+                                    .addComponent(NomeUtenteField)
+                                    .addComponent(NomeStrutturaField)
+                                    .addComponent(ResetButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 743, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(20, 20, 20))))
@@ -269,6 +280,8 @@ public class GestioneRecensioni extends javax.swing.JFrame {
                         .addComponent(NomeUtenteField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(27, 27, 27)
                         .addComponent(CercaButton)
+                        .addGap(18, 18, 18)
+                        .addComponent(ResetButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(CompanyLabel)
                         .addGap(20, 20, 20))
@@ -318,8 +331,7 @@ public class GestioneRecensioni extends javax.swing.JFrame {
     }//GEN-LAST:event_GestioneRecensioniTableMouseClicked
 
     private void EliminaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminaButtonActionPerformed
-        // TODO add your handling code here:
-        
+               
         if(GestioneRecensioniTable.getSelectedRow()!=-1){
         
             Recensione recensione= new Recensione();
@@ -333,29 +345,34 @@ public class GestioneRecensioni extends javax.swing.JFrame {
             recensione.setVoto((int) GestioneRecensioniTable.getValueAt(GestioneRecensioniTable.getSelectedRow(), 6));
             
             GestioneRecensioniController.clickEliminaRecensione(recensione);
+            
+            UIManager.put("OptionPane.messageFont", new Font("Century Gothic", Font.BOLD, 18));
+            UIManager.put("OptionPane.buttonFont", new Font("Century Gothic", Font.PLAIN, 16));
+            JOptionPane.showMessageDialog(null,"Recensione eliminata correttamente!","ATTENZIONE!", JOptionPane.INFORMATION_MESSAGE);
+            
+            RiempiTabella();
+            
+            NomeStrutturaField.setText("");
+            NomeUtenteField.setText("");
         }else{
             UIManager.put("OptionPane.messageFont", new Font("Century Gothic", Font.BOLD, 18));
-            UIManager.put("OptionPane.buttonFont", new Font("Century Gothic", Font.ITALIC, 16));
+            UIManager.put("OptionPane.buttonFont", new Font("Century Gothic", Font.PLAIN, 16));
             JOptionPane.showMessageDialog(null,"Nessuna riga selezionata","ATTENZIONE!", JOptionPane.ERROR_MESSAGE);
         }
-        
-        this.dispose();
-        GestioneRecensioni newFrame = new GestioneRecensioni(admin);
-        newFrame.setVisible(true);
     }//GEN-LAST:event_EliminaButtonActionPerformed
 
     private void IndietroLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_IndietroLabelMouseClicked
-        // TODO add your handling code here:
+
         GestioneRecensioniController.clickIndietro(admin);
         this.dispose();        
     }//GEN-LAST:event_IndietroLabelMouseClicked
 
     private void NomeStrutturaFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NomeStrutturaFieldActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_NomeStrutturaFieldActionPerformed
 
     private void NomeUtenteFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NomeUtenteFieldActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_NomeUtenteFieldActionPerformed
 
     private void CercaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CercaButtonActionPerformed
@@ -373,8 +390,6 @@ public class GestioneRecensioni extends javax.swing.JFrame {
             recensione.setUsername(NomeUtenteField.getText());
             
             List<Recensione> recensioni= GestioneRecensioniController.clickCercaRecensione(recensione);
-            
-            //GestioneRecensioniTable.setModel(null);
         
             DefaultTableModel aModel = new DefaultTableModel() {
             //setting the jtable read only
@@ -418,6 +433,12 @@ public class GestioneRecensioni extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_CercaButtonActionPerformed
 
+    private void ResetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ResetButtonActionPerformed
+        RiempiTabella();
+        NomeStrutturaField.setText("");
+        NomeUtenteField.setText("");
+    }//GEN-LAST:event_ResetButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton CercaButton;
@@ -433,6 +454,7 @@ public class GestioneRecensioni extends javax.swing.JFrame {
     private javax.swing.JTextField OperatoreField;
     private javax.swing.JLabel OperatoreLabel;
     private javax.swing.JLabel ProjectLabel;
+    private javax.swing.JButton ResetButton;
     private javax.swing.JPanel ValidazioneRecensioniPanel;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables

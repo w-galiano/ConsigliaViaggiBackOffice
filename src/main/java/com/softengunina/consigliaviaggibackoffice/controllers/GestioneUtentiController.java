@@ -21,12 +21,15 @@ import com.softengunina.consigliaviaggibackoffice.AdminLogin;
 import com.softengunina.consigliaviaggibackoffice.models.Amministratore;
 import com.softengunina.consigliaviaggibackoffice.models.Struttura;
 import com.softengunina.consigliaviaggibackoffice.models.Utente;
+import java.awt.Font;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.UIManager;
 
 /**
  *
@@ -41,13 +44,10 @@ public class GestioneUtentiController {
             Firestore dbconn= Connessione.nuovaConnessione();
             
             ApiFuture<QuerySnapshot> qlist= dbconn.collection("Utenti").get();
-            //ApiFuture<QuerySnapshot> qlist2= dbconn.collection("Strutture").get();
 
             List<QueryDocumentSnapshot> docs= qlist.get().getDocuments();
-            //List<QueryDocumentSnapshot> docs2= qlist2.get().getDocuments();
             
             List<Utente> utentiList = new ArrayList<>();
-            //List<Struttura> struttureList = new ArrayList<>();
             
             for(QueryDocumentSnapshot document: docs){
                 Utente utente= document.toObject(Utente.class);
@@ -96,7 +96,15 @@ public class GestioneUtentiController {
             }
             
             if(!utente.getUsername().equals(oldUtente.getUsername())){
-                batch.update(docRef, "username", utente.getUsername());
+                ApiFuture<QuerySnapshot> qlist3= dbconn.collection("Utenti").whereEqualTo("username", utente.getUsername()).get();
+                List<QueryDocumentSnapshot> docs3= qlist3.get().getDocuments();
+                if(docs3.isEmpty()){
+                    batch.update(docRef, "username", utente.getUsername());
+                }else{
+                    UIManager.put("OptionPane.messageFont", new Font("Century Gothic", Font.BOLD, 18));
+                    UIManager.put("OptionPane.buttonFont", new Font("Century Gothic", Font.PLAIN, 16));
+                    JOptionPane.showMessageDialog(null,"Username non disponibile!","ATTENZIONE!", JOptionPane.ERROR_MESSAGE);
+                }
                 flag= true;
             }
             
@@ -111,11 +119,18 @@ public class GestioneUtentiController {
             }
             
             if(!utente.getEmail().equals(oldUtente.getEmail())){
-                batch.update(docRef, "email", utente.getEmail());
-                UpdateRequest request = new UpdateRequest(userRecord.getUid())
-                    .setEmail(utente.getEmail());
-
-                FirebaseAuth.getInstance().updateUser(request);
+                ApiFuture<QuerySnapshot> qlist4= dbconn.collection("Utenti").whereEqualTo("email", utente.getEmail()).get();
+                List<QueryDocumentSnapshot> docs4= qlist4.get().getDocuments();
+                if(docs4.isEmpty()){
+                    batch.update(docRef, "email", utente.getEmail());
+                    UpdateRequest request = new UpdateRequest(userRecord.getUid())
+                        .setEmail(utente.getEmail());
+                    FirebaseAuth.getInstance().updateUser(request);
+                }else{
+                    UIManager.put("OptionPane.messageFont", new Font("Century Gothic", Font.BOLD, 18));
+                    UIManager.put("OptionPane.buttonFont", new Font("Century Gothic", Font.PLAIN, 16));
+                    JOptionPane.showMessageDialog(null,"Email non disponibile!","ATTENZIONE!", JOptionPane.ERROR_MESSAGE);
+                }
                 flag= true;
             }
             

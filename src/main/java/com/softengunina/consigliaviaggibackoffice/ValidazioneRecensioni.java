@@ -18,7 +18,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
-import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 
@@ -42,7 +41,9 @@ public class ValidazioneRecensioni extends javax.swing.JFrame {
         admin= currAdmin;
         
         OperatoreField.setText(String.valueOf(currAdmin.getID()));
-        
+    }
+    
+    public void RiempiTabella(){
         List<Recensione> recensioni= ValidazioneRecensioniController.mostraRecensioni();
         
         DefaultTableModel aModel = new DefaultTableModel() {
@@ -272,7 +273,6 @@ public class ValidazioneRecensioni extends javax.swing.JFrame {
     }//GEN-LAST:event_ValidazioneRecensioniTableMouseClicked
 
     private void ApprovaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ApprovaButtonActionPerformed
-        // TODO add your handling code here:
         
         if(ValidazioneRecensioniTable.getSelectedRow()!=-1){
         
@@ -293,14 +293,15 @@ public class ValidazioneRecensioni extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null,"Nessuna riga selezionata","ATTENZIONE!", JOptionPane.ERROR_MESSAGE);
         }
         
-        this.dispose();
-        ValidazioneRecensioni newFrame = new ValidazioneRecensioni(admin);
-        newFrame.setVisible(true);
+        UIManager.put("OptionPane.messageFont", new Font("Century Gothic", Font.BOLD, 18));
+        UIManager.put("OptionPane.buttonFont", new Font("Century Gothic", Font.PLAIN, 16));
+        JOptionPane.showMessageDialog(null,"Recensione approvata correttamente!","ATTENZIONE!", JOptionPane.INFORMATION_MESSAGE);
+        
+        RiempiTabella();
     }//GEN-LAST:event_ApprovaButtonActionPerformed
 
     private void EliminaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminaButtonActionPerformed
-        // TODO add your handling code here:
-        
+                
         if(ValidazioneRecensioniTable.getSelectedRow()!=-1){
         
             Recensione recensione= new Recensione();
@@ -320,13 +321,15 @@ public class ValidazioneRecensioni extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null,"Nessuna riga selezionata","ATTENZIONE!", JOptionPane.ERROR_MESSAGE);
         }
         
-        this.dispose();
-        ValidazioneRecensioni newFrame = new ValidazioneRecensioni(admin);
-        newFrame.setVisible(true);
+        UIManager.put("OptionPane.messageFont", new Font("Century Gothic", Font.BOLD, 18));
+        UIManager.put("OptionPane.buttonFont", new Font("Century Gothic", Font.PLAIN, 16));
+        JOptionPane.showMessageDialog(null,"Recensione eliminata correttamente!","ATTENZIONE!", JOptionPane.INFORMATION_MESSAGE);
+        
+        RiempiTabella();
     }//GEN-LAST:event_EliminaButtonActionPerformed
 
     private void IndietroLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_IndietroLabelMouseClicked
-        // TODO add your handling code here:
+        
         ValidazioneRecensioniController.clickIndietro(admin);
         this.dispose();        
     }//GEN-LAST:event_IndietroLabelMouseClicked

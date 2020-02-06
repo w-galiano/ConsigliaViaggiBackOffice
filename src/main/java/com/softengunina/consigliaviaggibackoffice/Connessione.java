@@ -44,15 +44,6 @@ public class Connessione {
         }              
         
         Firestore db= FirestoreClient.getFirestore(app);
-        
-        /*QuerySnapshot qs= db.collection("Strutture").get().get();
-
-        ApiFuture<QuerySnapshot> qlist = db.collection("Strutture").get();
-
-        List<QueryDocumentSnapshot> documents = qlist.get().getDocuments();
-        documents.forEach((document) -> {
-            System.out.println(document.getId() + " => " + document.getData());
-        });*/
         return db;
     }
 }

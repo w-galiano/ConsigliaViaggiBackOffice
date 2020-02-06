@@ -140,18 +140,25 @@ public class AdminLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void AccediButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AccediButtonActionPerformed
-        // TODO add your handling code here:
-        
-        if(IDField.getText().isEmpty() || PasswordField.getText().isEmpty()){
-            UIManager.put("OptionPane.messageFont", new Font("Century Gothic", Font.BOLD, 18));
-            UIManager.put("OptionPane.buttonFont", new Font("Century Gothic", Font.ITALIC, 16));
-            JOptionPane.showMessageDialog(null,"Compilare tutti i campi!","ATTENZIONE!", JOptionPane.ERROR_MESSAGE);
+
+        if(IDField.getText().isEmpty() || PasswordField.getText().isEmpty() || !IDField.getText().matches("^[0-9]*$")){
+            if(IDField.getText().isEmpty() || PasswordField.getText().isEmpty()){
+                UIManager.put("OptionPane.messageFont", new Font("Century Gothic", Font.BOLD, 18));
+                UIManager.put("OptionPane.buttonFont", new Font("Century Gothic", Font.PLAIN, 16));
+                JOptionPane.showMessageDialog(null,"Compilare tutti i campi!","ATTENZIONE!", JOptionPane.ERROR_MESSAGE);
+            }else{
+                UIManager.put("OptionPane.messageFont", new Font("Century Gothic", Font.BOLD, 18));
+                UIManager.put("OptionPane.buttonFont", new Font("Century Gothic", Font.PLAIN, 16));
+                JOptionPane.showMessageDialog(null,"ID errato!","ATTENZIONE!", JOptionPane.ERROR_MESSAGE);
+                IDField.setText("");
+                PasswordField.setText("");
+            }            
         }else{
             if(AdminLoginController.clickLogin(Integer.parseInt(IDField.getText()), PasswordField.getText()) == true){
                 this.dispose();
             }else{
                 UIManager.put("OptionPane.messageFont", new Font("Century Gothic", Font.BOLD, 18));
-                UIManager.put("OptionPane.buttonFont", new Font("Century Gothic", Font.ITALIC, 16));
+                UIManager.put("OptionPane.buttonFont", new Font("Century Gothic", Font.PLAIN, 16));
                 JOptionPane.showMessageDialog(null,"Credenziali errate, riprovare!","ATTENZIONE!", JOptionPane.ERROR_MESSAGE);
                 IDField.setText("");
                 PasswordField.setText("");

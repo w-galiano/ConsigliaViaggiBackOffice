@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.regex.Matcher; 
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
@@ -42,6 +41,10 @@ public class GestioneUtenti extends javax.swing.JFrame {
         
         OperatoreField.setText(String.valueOf(currAdmin.getID()));
         
+        RiempiTabella();
+    }
+    
+    public void RiempiTabella(){
         List<Utente> utenti= GestioneUtentiController.mostraUtenti();
         
         this.utenti= utenti;
@@ -295,8 +298,8 @@ public class GestioneUtenti extends javax.swing.JFrame {
                 || utente.getRisposta().isEmpty()){
                 
                 UIManager.put("OptionPane.messageFont", new Font("Century Gothic", Font.BOLD, 18));
-                UIManager.put("OptionPane.buttonFont", new Font("Century Gothic", Font.ITALIC, 16));
-                JOptionPane.showMessageDialog(null,"Non lasciare campi vuoti 1 !","ATTENZIONE!", JOptionPane.ERROR_MESSAGE);
+                UIManager.put("OptionPane.buttonFont", new Font("Century Gothic", Font.PLAIN, 16));
+                JOptionPane.showMessageDialog(null,"Non lasciare campi vuoti!","ATTENZIONE!", JOptionPane.ERROR_MESSAGE);
                 
                 return;
             }
@@ -305,7 +308,7 @@ public class GestioneUtenti extends javax.swing.JFrame {
                 || isInvalidText(utente.getRisposta())){
                 
                 UIManager.put("OptionPane.messageFont", new Font("Century Gothic", Font.BOLD, 18));
-                UIManager.put("OptionPane.buttonFont", new Font("Century Gothic", Font.ITALIC, 16));
+                UIManager.put("OptionPane.buttonFont", new Font("Century Gothic", Font.PLAIN, 16));
                 JOptionPane.showMessageDialog(null,"Stringa non valida!","ATTENZIONE!", JOptionPane.ERROR_MESSAGE);
                 
                 return;
@@ -313,30 +316,30 @@ public class GestioneUtenti extends javax.swing.JFrame {
             
             if(!isValidEmail(UtentiTable.getValueAt(UtentiTable.getSelectedRow(), 3).toString())){
                 UIManager.put("OptionPane.messageFont", new Font("Century Gothic", Font.BOLD, 18));
-                UIManager.put("OptionPane.buttonFont", new Font("Century Gothic", Font.ITALIC, 16));
+                UIManager.put("OptionPane.buttonFont", new Font("Century Gothic", Font.PLAIN, 16));
                 JOptionPane.showMessageDialog(null,"Formato email non valido!","ATTENZIONE!", JOptionPane.ERROR_MESSAGE);
                 
                 return;
             }
             
-            
-            
             try {
                 if(GestioneUtentiController.clickConfermaModificaUtente(utente, this.utenti.get(UtentiTable.getSelectedRow()))==-1){
                     UIManager.put("OptionPane.messageFont", new Font("Century Gothic", Font.BOLD, 18));
-                    UIManager.put("OptionPane.buttonFont", new Font("Century Gothic", Font.ITALIC, 16));
+                    UIManager.put("OptionPane.buttonFont", new Font("Century Gothic", Font.PLAIN, 16));
                     JOptionPane.showMessageDialog(null,"Nessun campo modificato!","ATTENZIONE!", JOptionPane.ERROR_MESSAGE);
                 }
             } catch (FirebaseAuthException ex) {
                 Logger.getLogger(GestioneUtenti.class.getName()).log(Level.SEVERE, null, ex);
             }
             
-            this.dispose();
-            GestioneUtenti newFrame = new GestioneUtenti(admin);
-            newFrame.setVisible(true);
+            UIManager.put("OptionPane.messageFont", new Font("Century Gothic", Font.BOLD, 18));
+            UIManager.put("OptionPane.buttonFont", new Font("Century Gothic", Font.PLAIN, 16));
+            JOptionPane.showMessageDialog(null,"Utente modificato correttamente!","ATTENZIONE!", JOptionPane.INFORMATION_MESSAGE);
+            
+            RiempiTabella();
         }else{
             UIManager.put("OptionPane.messageFont", new Font("Century Gothic", Font.BOLD, 18));
-            UIManager.put("OptionPane.buttonFont", new Font("Century Gothic", Font.ITALIC, 16));
+            UIManager.put("OptionPane.buttonFont", new Font("Century Gothic", Font.PLAIN, 16));
             JOptionPane.showMessageDialog(null,"Nessuna riga selezionata","ATTENZIONE!", JOptionPane.ERROR_MESSAGE);
         }
         
@@ -360,13 +363,15 @@ public class GestioneUtenti extends javax.swing.JFrame {
             GestioneUtentiController.clickEliminaUtente(utente);
         }else{
             UIManager.put("OptionPane.messageFont", new Font("Century Gothic", Font.BOLD, 18));
-            UIManager.put("OptionPane.buttonFont", new Font("Century Gothic", Font.ITALIC, 16));
+            UIManager.put("OptionPane.buttonFont", new Font("Century Gothic", Font.PLAIN, 16));
             JOptionPane.showMessageDialog(null,"Nessuna riga selezionata","ATTENZIONE!", JOptionPane.ERROR_MESSAGE);
         }
         
-        this.dispose();
-        GestioneUtenti newFrame = new GestioneUtenti(admin);
-        newFrame.setVisible(true);
+        UIManager.put("OptionPane.messageFont", new Font("Century Gothic", Font.BOLD, 18));
+        UIManager.put("OptionPane.buttonFont", new Font("Century Gothic", Font.PLAIN, 16));
+        JOptionPane.showMessageDialog(null,"Utente eliminato correttamente!","ATTENZIONE!", JOptionPane.INFORMATION_MESSAGE);
+        
+        RiempiTabella();
     }//GEN-LAST:event_EliminaButtonActionPerformed
 
     private void IndietroLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_IndietroLabelMouseClicked
