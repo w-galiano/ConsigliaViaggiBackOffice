@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.softengunina.consigliaviaggibackoffice;
 
 import com.softengunina.consigliaviaggibackoffice.controllers.GestioneRecensioniController;
@@ -23,7 +18,9 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
+ * @author Alessandro Fontanella
  * @author Walter Galiano
+ * @author Stefano Sivo
  */
 public class GestioneRecensioni extends javax.swing.JFrame {
     
@@ -307,8 +304,6 @@ public class GestioneRecensioni extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void GestioneRecensioniTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_GestioneRecensioniTableMouseClicked
-        // TODO add your handling code here:
-        
         GestioneRecensioniTable.addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent mouseEvent) {
                 JTable table =(JTable) mouseEvent.getSource();
@@ -331,7 +326,6 @@ public class GestioneRecensioni extends javax.swing.JFrame {
     }//GEN-LAST:event_GestioneRecensioniTableMouseClicked
 
     private void EliminaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminaButtonActionPerformed
-               
         if(GestioneRecensioniTable.getSelectedRow()!=-1){
         
             Recensione recensione= new Recensione();
@@ -362,7 +356,6 @@ public class GestioneRecensioni extends javax.swing.JFrame {
     }//GEN-LAST:event_EliminaButtonActionPerformed
 
     private void IndietroLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_IndietroLabelMouseClicked
-
         GestioneRecensioniController.clickIndietro(admin);
         this.dispose();        
     }//GEN-LAST:event_IndietroLabelMouseClicked
@@ -376,7 +369,6 @@ public class GestioneRecensioni extends javax.swing.JFrame {
     }//GEN-LAST:event_NomeUtenteFieldActionPerformed
 
     private void CercaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CercaButtonActionPerformed
-        // TODO add your handling code here:
         if(NomeStrutturaField.getText().isEmpty() && NomeUtenteField.getText().isEmpty()){
             UIManager.put("OptionPane.messageFont", new Font("Century Gothic", Font.BOLD, 18));
             UIManager.put("OptionPane.buttonFont", new Font("Century Gothic", Font.ITALIC, 16));

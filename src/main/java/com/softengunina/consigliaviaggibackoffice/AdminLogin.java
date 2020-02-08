@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.softengunina.consigliaviaggibackoffice;
 
 import com.softengunina.consigliaviaggibackoffice.controllers.AdminLoginController;
@@ -13,7 +8,9 @@ import javax.swing.UIManager;
 
 /**
  *
+ * @author Alessandro Fontanella
  * @author Walter Galiano
+ * @author Stefano Sivo
  */
 public class AdminLogin extends javax.swing.JFrame {
 
@@ -140,7 +137,6 @@ public class AdminLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void AccediButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AccediButtonActionPerformed
-
         if(IDField.getText().isEmpty() || PasswordField.getText().isEmpty() || !IDField.getText().matches("^[0-9]*$")){
             if(IDField.getText().isEmpty() || PasswordField.getText().isEmpty()){
                 UIManager.put("OptionPane.messageFont", new Font("Century Gothic", Font.BOLD, 18));

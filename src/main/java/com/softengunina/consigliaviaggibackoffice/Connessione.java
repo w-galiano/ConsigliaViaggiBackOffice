@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.softengunina.consigliaviaggibackoffice;
 
 import com.google.auth.oauth2.GoogleCredentials;
@@ -18,15 +13,12 @@ import java.util.concurrent.ExecutionException;
 
 /**
  *
+ * @author Alessandro Fontanella
  * @author Walter Galiano
+ * @author Stefano Sivo
  */
 public class Connessione {
-    /**
-     * @param args the command line arguments
-     */
     public static Firestore nuovaConnessione() throws FileNotFoundException, IOException, InterruptedException, ExecutionException {
-        // TODO code application logic here
-
         FileInputStream serviceAccount
                 = new FileInputStream("C:\\Users\\walte\\Documents\\NetBeansProjects\\consigliaviaggi1920-38-firebase-adminsdk-ag5wd-2e5eb75f7a.json");
 

@@ -1,15 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.softengunina.consigliaviaggibackoffice;
 import com.softengunina.consigliaviaggibackoffice.controllers.AdminHomeController;
 import com.softengunina.consigliaviaggibackoffice.models.Amministratore;
 
 /**
  *
+ * @author Alessandro Fontanella
  * @author Walter Galiano
+ * @author Stefano Sivo
  */
 public class AdminHome extends javax.swing.JFrame {
 
@@ -48,6 +45,7 @@ public class AdminHome extends javax.swing.JFrame {
         OperatoreLabel = new javax.swing.JLabel();
         LogoutButton = new javax.swing.JButton();
         OperatoreField = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -115,29 +113,37 @@ public class AdminHome extends javax.swing.JFrame {
         OperatoreField.setForeground(new java.awt.Color(51, 51, 255));
         OperatoreField.setBorder(null);
 
+        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\walte\\Desktop\\ConsigliaViaggiBackOffice\\src\\main\\java\\Immagini\\ConsigliaViaggiICO.png")); // NOI18N
+
         javax.swing.GroupLayout AdminHomePanelLayout = new javax.swing.GroupLayout(AdminHomePanel);
         AdminHomePanel.setLayout(AdminHomePanelLayout);
         AdminHomePanelLayout.setHorizontalGroup(
             AdminHomePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(AdminHomePanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(306, Short.MAX_VALUE)
                 .addComponent(AdminHomeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(116, 116, 116)
                 .addComponent(LogoutButton)
                 .addGap(20, 20, 20))
             .addGroup(AdminHomePanelLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(AdminHomePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(ValidaRecensioniButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(AdminHomePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(ProjectLabel)
-                    .addComponent(CompanyLabel)
-                    .addComponent(GestisciRecensioniButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(GestisciUtentiButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 261, Short.MAX_VALUE)
+                    .addComponent(CompanyLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(OperatoreLabel)
                 .addGap(4, 4, 4)
                 .addComponent(OperatoreField, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(143, 143, 143))
+            .addGroup(AdminHomePanelLayout.createSequentialGroup()
+                .addGap(99, 99, 99)
+                .addGroup(AdminHomePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(ValidaRecensioniButton, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(GestisciUtentiButton, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(GestisciRecensioniButton))
+                .addGap(145, 145, 145)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         AdminHomePanelLayout.setVerticalGroup(
             AdminHomePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -152,13 +158,16 @@ public class AdminHome extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(AdminHomeLabel))
                     .addComponent(LogoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(42, 42, 42)
-                .addComponent(GestisciRecensioniButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addComponent(GestisciUtentiButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addComponent(ValidaRecensioniButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)
+                .addGap(62, 62, 62)
+                .addGroup(AdminHomePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(AdminHomePanelLayout.createSequentialGroup()
+                        .addComponent(GestisciRecensioniButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(35, 35, 35)
+                        .addComponent(GestisciUtentiButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(35, 35, 35)
+                        .addComponent(ValidaRecensioniButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
                 .addComponent(CompanyLabel)
                 .addGap(20, 20, 20))
         );
@@ -178,28 +187,24 @@ public class AdminHome extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void LogoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutButtonActionPerformed
-        // TODO add your handling code here:
         this.dispose();
         
         AdminHomeController.clickLogout();
     }//GEN-LAST:event_LogoutButtonActionPerformed
 
     private void ValidaRecensioniButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ValidaRecensioniButtonActionPerformed
-        // TODO add your handling code here:
         this.dispose();
         
         AdminHomeController.clickValidaRecensioni(admin);
     }//GEN-LAST:event_ValidaRecensioniButtonActionPerformed
 
     private void GestisciRecensioniButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GestisciRecensioniButtonActionPerformed
-        // TODO add your handling code here:
         this.dispose();
         
         AdminHomeController.clickGestisciRecensioni(admin);
     }//GEN-LAST:event_GestisciRecensioniButtonActionPerformed
 
     private void GestisciUtentiButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GestisciUtentiButtonActionPerformed
-        // TODO add your handling code here:
         this.dispose();
         
         AdminHomeController.clickGestisciUtenti(admin);
@@ -217,5 +222,6 @@ public class AdminHome extends javax.swing.JFrame {
     private javax.swing.JLabel OperatoreLabel;
     private javax.swing.JLabel ProjectLabel;
     private javax.swing.JButton ValidaRecensioniButton;
+    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

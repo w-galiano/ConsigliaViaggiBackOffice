@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.softengunina.consigliaviaggibackoffice;
 
 import com.softengunina.consigliaviaggibackoffice.controllers.ValidazioneRecensioniController;
@@ -23,7 +18,9 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
+ * @author Alessandro Fontanella
  * @author Walter Galiano
+ * @author Stefano Sivo
  */
 public class ValidazioneRecensioni extends javax.swing.JFrame {
     
@@ -249,8 +246,6 @@ public class ValidazioneRecensioni extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void ValidazioneRecensioniTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ValidazioneRecensioniTableMouseClicked
-        // TODO add your handling code here:
-        
         ValidazioneRecensioniTable.addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent mouseEvent) {
                 JTable table =(JTable) mouseEvent.getSource();
@@ -273,7 +268,6 @@ public class ValidazioneRecensioni extends javax.swing.JFrame {
     }//GEN-LAST:event_ValidazioneRecensioniTableMouseClicked
 
     private void ApprovaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ApprovaButtonActionPerformed
-        
         if(ValidazioneRecensioniTable.getSelectedRow()!=-1){
         
             Recensione recensione= new Recensione();
@@ -301,7 +295,6 @@ public class ValidazioneRecensioni extends javax.swing.JFrame {
     }//GEN-LAST:event_ApprovaButtonActionPerformed
 
     private void EliminaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminaButtonActionPerformed
-                
         if(ValidazioneRecensioniTable.getSelectedRow()!=-1){
         
             Recensione recensione= new Recensione();
@@ -329,7 +322,6 @@ public class ValidazioneRecensioni extends javax.swing.JFrame {
     }//GEN-LAST:event_EliminaButtonActionPerformed
 
     private void IndietroLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_IndietroLabelMouseClicked
-        
         ValidazioneRecensioniController.clickIndietro(admin);
         this.dispose();        
     }//GEN-LAST:event_IndietroLabelMouseClicked

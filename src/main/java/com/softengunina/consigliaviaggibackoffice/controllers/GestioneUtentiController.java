@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.softengunina.consigliaviaggibackoffice.controllers;
 
 import com.google.api.core.ApiFuture;
@@ -33,7 +28,9 @@ import javax.swing.UIManager;
 
 /**
  *
+ * @author Alessandro Fontanella
  * @author Walter Galiano
+ * @author Stefano Sivo
  */
 
 public class GestioneUtentiController {

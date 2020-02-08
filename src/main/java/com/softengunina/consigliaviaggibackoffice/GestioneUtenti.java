@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.softengunina.consigliaviaggibackoffice;
 
 import com.google.firebase.auth.FirebaseAuthException;
@@ -22,7 +17,9 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
+ * @author Alessandro Fontanella
  * @author Walter Galiano
+ * @author Stefano Sivo
  */
 public class GestioneUtenti extends javax.swing.JFrame {
     private Amministratore admin;
@@ -281,8 +278,6 @@ public class GestioneUtenti extends javax.swing.JFrame {
     }//GEN-LAST:event_UtentiTableMouseClicked
 
     private void ConfermaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfermaButtonActionPerformed
-        // TODO add your handling code here:
-        
         if(UtentiTable.getSelectedRow()!=-1){
         
             Utente utente= new Utente();
@@ -347,8 +342,6 @@ public class GestioneUtenti extends javax.swing.JFrame {
     }//GEN-LAST:event_ConfermaButtonActionPerformed
 
     private void EliminaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminaButtonActionPerformed
-        // TODO add your handling code here:
-        
         if(UtentiTable.getSelectedRow()!=-1){
         
             Utente utente= new Utente();
@@ -375,7 +368,6 @@ public class GestioneUtenti extends javax.swing.JFrame {
     }//GEN-LAST:event_EliminaButtonActionPerformed
 
     private void IndietroLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_IndietroLabelMouseClicked
-        // TODO add your handling code here:
         GestioneUtentiController.clickIndietro(admin);
         this.dispose();        
     }//GEN-LAST:event_IndietroLabelMouseClicked
