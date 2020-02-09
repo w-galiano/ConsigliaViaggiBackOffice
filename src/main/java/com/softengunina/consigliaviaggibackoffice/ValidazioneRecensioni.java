@@ -38,6 +38,8 @@ public class ValidazioneRecensioni extends javax.swing.JFrame {
         admin= currAdmin;
         
         OperatoreField.setText(String.valueOf(currAdmin.getID()));
+        
+        RiempiTabella();
     }
     
     public void RiempiTabella(){

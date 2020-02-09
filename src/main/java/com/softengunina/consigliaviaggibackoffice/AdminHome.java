@@ -77,6 +77,7 @@ public class AdminHome extends javax.swing.JFrame {
         GestisciUtentiButton.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         GestisciUtentiButton.setForeground(new java.awt.Color(255, 255, 255));
         GestisciUtentiButton.setText("GESTISCI UTENTI");
+        GestisciUtentiButton.setPreferredSize(new java.awt.Dimension(213, 31));
         GestisciUtentiButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 GestisciUtentiButtonActionPerformed(evt);
@@ -87,6 +88,7 @@ public class AdminHome extends javax.swing.JFrame {
         ValidaRecensioniButton.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         ValidaRecensioniButton.setForeground(new java.awt.Color(255, 255, 255));
         ValidaRecensioniButton.setText("VALIDA RECENSIONI");
+        ValidaRecensioniButton.setPreferredSize(new java.awt.Dimension(213, 31));
         ValidaRecensioniButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ValidaRecensioniButtonActionPerformed(evt);
