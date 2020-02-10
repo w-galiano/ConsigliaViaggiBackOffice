@@ -13,6 +13,7 @@ import com.softengunina.consigliaviaggibackoffice.models.Amministratore;
 import com.softengunina.consigliaviaggibackoffice.models.Recensione;
 import com.softengunina.consigliaviaggibackoffice.models.Struttura;
 import java.io.IOException;
+import static java.lang.Thread.sleep;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -104,6 +105,7 @@ public class ValidazioneRecensioniController {
             DocumentReference docRef = dbconn.collection("Recensioni").document(daApprovare);
             batch.update(docRef, "pubblicata", true);            
             batch.commit();
+            sleep(500);
             //aggiornamento valutazione media
             WriteBatch batch2 = dbconn.batch();
             ApiFuture<QuerySnapshot> qlist3= dbconn.collection("Recensioni").whereEqualTo("struttura", indirizzo).whereEqualTo("pubblicata", true).get();

@@ -54,14 +54,13 @@ public class GestioneRecensioni extends javax.swing.JFrame {
         }};
 
         //setting the column name
-        Object[] tableColumnNames = new Object[7];
+        Object[] tableColumnNames = new Object[6];
         tableColumnNames[0]= "Autore";
         tableColumnNames[1]= "Commento";
-        tableColumnNames[2]= "Pubblicata";
-        tableColumnNames[3]= "Struttura";
-        tableColumnNames[4]= "Titolo";
-        tableColumnNames[5]= "Username";
-        tableColumnNames[6]= "Voto";
+        tableColumnNames[2]= "Struttura";
+        tableColumnNames[3]= "Titolo";
+        tableColumnNames[4]= "Username";
+        tableColumnNames[5]= "Voto";
 
         aModel.setColumnIdentifiers(tableColumnNames);
         if (recensioni == null) {
@@ -69,15 +68,14 @@ public class GestioneRecensioni extends javax.swing.JFrame {
             return;
         }
 
-        Object[] objects = new Object[7];
+        Object[] objects = new Object[6];
         for(int i=0; i<recensioni.size(); i++){
             objects[0]= recensioni.get(i).getAutore();
             objects[1]= recensioni.get(i).getCommento();
-            objects[2]= recensioni.get(i).getPubblicata();
-            objects[3]= recensioni.get(i).getStruttura();
-            objects[4]= recensioni.get(i).getTitolo();
-            objects[5]= recensioni.get(i).getUsername();
-            objects[6]= recensioni.get(i).getVoto();
+            objects[2]= recensioni.get(i).getStruttura();
+            objects[3]= recensioni.get(i).getTitolo();
+            objects[4]= recensioni.get(i).getUsername();
+            objects[5]= recensioni.get(i).getVoto();
             
             aModel.addRow(objects);
         }
@@ -392,14 +390,13 @@ public class GestioneRecensioni extends javax.swing.JFrame {
             }};
 
             //setting the column name
-            Object[] tableColumnNames = new Object[7];
+            Object[] tableColumnNames = new Object[6];
             tableColumnNames[0]= "Autore";
             tableColumnNames[1]= "Commento";
-            tableColumnNames[2]= "Pubblicata";
-            tableColumnNames[3]= "Struttura";
-            tableColumnNames[4]= "Titolo";
-            tableColumnNames[5]= "Username";
-            tableColumnNames[6]= "Voto";
+            tableColumnNames[2]= "Struttura";
+            tableColumnNames[3]= "Titolo";
+            tableColumnNames[4]= "Username";
+            tableColumnNames[5]= "Voto";
 
             aModel.setColumnIdentifiers(tableColumnNames);
             if (recensioni == null) {
@@ -407,15 +404,14 @@ public class GestioneRecensioni extends javax.swing.JFrame {
                 return;
             }
 
-            Object[] objects = new Object[7];
+            Object[] objects = new Object[6];
             for(int i=0; i<recensioni.size(); i++){
                 objects[0]= recensioni.get(i).getAutore();
                 objects[1]= recensioni.get(i).getCommento();
-                objects[2]= recensioni.get(i).getPubblicata();
-                objects[3]= recensioni.get(i).getStruttura();
-                objects[4]= recensioni.get(i).getTitolo();
-                objects[5]= recensioni.get(i).getUsername();
-                objects[6]= recensioni.get(i).getVoto();
+                objects[2]= recensioni.get(i).getStruttura();
+                objects[3]= recensioni.get(i).getTitolo();
+                objects[4]= recensioni.get(i).getUsername();
+                objects[5]= recensioni.get(i).getVoto();
 
                 aModel.addRow(objects);
             }
